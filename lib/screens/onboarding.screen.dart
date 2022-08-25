@@ -3,7 +3,9 @@ import 'dart:ui';
 import "package:flutter/material.dart";
 import 'package:neon_movies_app/components/custom_outline.dart';
 import 'package:neon_movies_app/constants.dart';
+import 'package:neon_movies_app/screens/home_screen.dart';
 
+import '../common widgets/positioningContainer.dart';
 import '../constants.dart';
 
 class OnboardingScreen extends StatelessWidget {
@@ -21,52 +23,42 @@ class OnboardingScreen extends StatelessWidget {
         height: screenHeight,
         child: Stack(
           children: [
-            Positioned(
-              top: screenHeight * 0.1,
-              left: -88,
-              child: Container(
-                height: 166,
-                width: 166,
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Constants.kPinkColor,
-                ),
-                child: BackdropFilter(
-                  filter: ImageFilter.blur(
-                    sigmaX: 166,
-                    sigmaY: 166,
-                  ),
-                  child: Container(
-                      height: 166, width: 166, color: Colors.transparent),
-                ),
-              ),
-            ),
-            Positioned(
-              top: screenHeight * 0.3,
+           PositioningContainer(
+            top: screenHeight * 0.1,
+            left: -88, 
+            color1: Constants.kPinkColor, 
+            height: 166, 
+            width: 166, 
+            sigmaX: 166, 
+            sigmaY: 166, 
+            child:  Container(
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.transparent,
+                    ),
+                    height: 166,
+                    width: 166,
+                  ),),
+          
+            PositioningContainer(
+              top: screenHeight * 0.3, 
               right: -100,
+              color1: Constants.kGreenColor, 
+              height: 200, 
+              width: 300, 
+              sigmaX: 200, 
+              sigmaY: 200, 
               child: Container(
-                height: 200,
-                width: 300,
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Constants.kGreenColor,
-                ),
-                child: BackdropFilter(
-                  filter: ImageFilter.blur(
-                    sigmaX: 200,
-                    sigmaY: 200,
-                  ),
-                  child: Container(
                     decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                       color: Color(0xAB09FBD3),
                     ),
                     height: 200,
-                    width: 200,
-                  ),
-                ),
-              ),
-            ),
+                    width: 300,
+                  ),),
+           
+            // ),
+
             SafeArea(
               child: Center(
                 child: Column(
@@ -157,10 +149,13 @@ class OnboardingScreen extends StatelessWidget {
                             ],
                           ),
                         ),
-                        child: const Text(
-                          'Sign Up',
-                          style: TextStyle(
-                              fontSize: 14, color: Constants.kWhiteColor),
+                        child: InkWell(
+                          onTap: () => HomeScreen.show(context),
+                          child: const Text(
+                            'Sign Up',
+                            style: TextStyle(
+                                fontSize: 14, color: Constants.kWhiteColor),
+                          ),
                         ),
                       ),
                     ),
@@ -195,3 +190,4 @@ class OnboardingScreen extends StatelessWidget {
     // ),
   }
 }
+
