@@ -1,6 +1,8 @@
 class Movie {
   Movie(
-      {this.movieName = '',
+      {
+       
+      this.movieName = '',
       this.moviePoster = '',
       this.movieReleaseYear = '',
       this.movieCategory = '',
@@ -8,7 +10,7 @@ class Movie {
       this.movieRating = '',
       this.movieSinopsis = '',
       this.movieCast = const []});
-
+ 
   String movieName;
   String moviePoster;
   String movieReleaseYear;
@@ -19,6 +21,10 @@ class Movie {
   List<String> movieCast;
 }
 
+List<String> moviestitle = [
+  'New Movies',
+  'Upcoming Movies'
+];
 var newMovies = [
   Movie(
     movieName: 'Spider-Man: No Way Home',

@@ -3,7 +3,9 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:neon_movies_app/common%20widgets/positioningContainer.dart';
 import 'package:neon_movies_app/common%20widgets/search_input_panel.dart';
+import 'package:neon_movies_app/components/masked_image.dart';
 import 'package:neon_movies_app/constants.dart';
+import 'package:neon_movies_app/models/movie.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -73,9 +75,9 @@ class _HomeScreenState extends State<HomeScreen> {
               bottom: false,
               child: ListView(
                 primary: true,
-                children: const[
-                  SizedBox(height: 24 ,),
-                  Text('What would you\n like to watch?',
+                children: [
+                 const SizedBox(height: 24 ,),
+                 const Text('What would you\n like to watch?',
                   style: TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.w700,
@@ -83,9 +85,91 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   textAlign: TextAlign.center,
                   ),
-                  SizedBox(height: 30 ,),
-                  SearchInputPanel(
-                    padding: EdgeInsets.symmetric(horizontal: 20.0))
+               const   SizedBox(height: 30 ,),
+                const  SearchInputPanel(
+                    padding: EdgeInsets.symmetric(horizontal: 20.0),),
+               const SizedBox(height: 39,),
+             Padding(
+                padding:const EdgeInsets.only(left: 18),
+                child: Text(moviestitle.first, 
+                style: const TextStyle(
+                  color: Constants.kWhiteColor,
+                  fontSize: 17
+                ) ,),
+              ),
+              const SizedBox(height: 37,),
+              SizedBox(
+                height: 180,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index){
+                    String mask;
+                    if(index ==0){
+                      mask = Constants.kMaskFirstIndex;
+                    } else if(index == newMovies.length -1 ){
+                      mask = Constants.kMaskLastIndex;
+                    }else{
+                      mask = Constants.kMaskCenter;
+                    }
+                    return GestureDetector(
+                      child: Container(
+                        margin: EdgeInsets.only(
+                          left:  index == 0 ? 30.0 : 0,),
+                        height: 180,
+                        width: 175,
+                        child: MaskedImage(
+                          mask: mask, 
+                          asset: newMovies[index].moviePoster,),
+                      ),
+                    );
+                  },
+                  itemCount: newMovies.length,
+                  ),
+              ),
+
+             const SizedBox(
+              height: 30,
+             ),
+              Padding(
+                padding:const EdgeInsets.only(left: 18),
+                child: Text(moviestitle.last, 
+                style: const TextStyle(
+                  color: Constants.kWhiteColor,
+                  fontSize: 17
+                ) ,),
+              ),
+              const SizedBox(height: 37,),
+              SizedBox(
+                height: 180,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index){
+                    String mask;
+                    if(index ==0){
+                      mask = Constants.kMaskFirstIndex;
+                    } else if(index == upcomingMovies.length -1 ){
+                      mask = Constants.kMaskLastIndex;
+                    }else{
+                      mask = Constants.kMaskCenter;
+                    }
+                    return GestureDetector(
+                      child: Container(
+                        margin: EdgeInsets.only(
+                          left:  index == 0 ? 30.0 : 0,),
+                        height: 180,
+                        width: 175,
+                        child: MaskedImage(
+                          mask: mask, 
+                          asset: upcomingMovies[index].moviePoster,),
+                      ),
+                    );
+                  },
+                  itemCount: upcomingMovies.length,
+                  ),
+              ),
+              const SizedBox(height: 16,)
                 ],
                 
                 ),
