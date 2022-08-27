@@ -1,4 +1,3 @@
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -8,20 +7,15 @@ import 'package:neon_movies_app/common%20widgets/search_input_panel.dart';
 import 'package:neon_movies_app/components/masked_image.dart';
 import 'package:neon_movies_app/constants.dart';
 import 'package:neon_movies_app/models/movie.dart';
+import 'package:neon_movies_app/screens/movie_screen.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   static Future<void> show(context) async {
     await Navigator.of(context)
         .push(MaterialPageRoute(builder: ((context) => const HomeScreen())));
   }
-
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
@@ -82,7 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 primary: true,
                 children: [
                   const SizedBox(
-                    height: 24,
+                    height: 34,
                   ),
                   const Text(
                     'What would you\n like to watch?',
@@ -94,13 +88,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(
-                    height: 30,
+                    height: 40,
                   ),
                   const SearchInputPanel(
                     padding: EdgeInsets.symmetric(horizontal: 20.0),
                   ),
                   const SizedBox(
-                    height: 39,
+                    height: 49,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 18),
@@ -111,10 +105,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   const SizedBox(
-                    height: 37,
+                    height: 47,
                   ),
                   SizedBox(
-                    height: 180,
+                    height: 280,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       shrinkWrap: true,
@@ -159,7 +153,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: 37,
                   ),
                   SizedBox(
-                    height: 180,
+                    height: 280,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       shrinkWrap: true,
@@ -226,7 +220,11 @@ class _HomeScreenState extends State<HomeScreen> {
         //             Constants.kPinkColor,
         //             Constants.kGreenColor,
         //           ])),
-          child: const Icon(Icons.add, color:Colors.white, size:35,),
+          child: GestureDetector(
+           onTap: (() {
+             Navigator.of(context).push(MaterialPageRoute(builder: ((context) => const MovieScreen()))
+          );}),
+            child: const Icon(Icons.add, color:Colors.white, size:35,)),
            // child: SvgPicture.asset(Constants.kIconPlus),
         //  ),
         ),
@@ -257,23 +255,31 @@ class _HomeScreenState extends State<HomeScreen> {
                 elevation: 0,
                 child: Row(
                   children: [
-                    IconButton(onPressed: (){}, 
-                    icon: SvgPicture.asset(Constants.kIconHome),
+                    Expanded(
+                      child: IconButton(onPressed: (){}, 
+                      icon: SvgPicture.asset(Constants.kIconHome),
+                      ),
                     ),
-                   const Spacer(),
-                    IconButton(onPressed: (){}, 
-                    icon: SvgPicture.asset(Constants.kIconPlayOnTv),
+                   //const Spacer(),
+                    Expanded(
+                      child: IconButton(onPressed: (){}, 
+                      icon: SvgPicture.asset(Constants.kIconPlayOnTv),
+                      ),
                     ),
-                   const Spacer(),
+                  // const Spacer(),
                   const Text(''),
-                 const Spacer(),
-                    IconButton(onPressed: (){}, 
-                    icon: SvgPicture.asset(Constants.kIconCategories),
+                // const Spacer(),
+                    Expanded(
+                      child: IconButton(onPressed: (){}, 
+                      icon: SvgPicture.asset(Constants.kIconCategories),
+                      ),
                     ),
                  
-                   const Spacer(),
-                    IconButton(onPressed: (){}, 
-                    icon: SvgPicture.asset(Constants.kIconDownload),
+                 //  const Spacer(),
+                    Expanded(
+                      child: IconButton(onPressed: (){}, 
+                      icon: SvgPicture.asset(Constants.kIconDownload),
+                      ),
                     )
                   ],
                 ),
